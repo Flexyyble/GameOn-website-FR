@@ -253,6 +253,12 @@ input {
   border: 5px solid green;
 }
 
+.errorText {
+  display: none;
+  font-size: 13px;
+  color: #ff0000;
+}
+
 /* 
 input[data-error]::after {
     content: attr(data-error);
