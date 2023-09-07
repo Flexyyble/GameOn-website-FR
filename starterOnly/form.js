@@ -85,16 +85,18 @@ function addEventForEmail() {
 
 // Fonction de validation de la date de naissance
 function validateBirthdate() {
-    let birthdate = getField("#birthdate").value;
+    let birthdate = getField("#birthdate");
     let errorBirthdate = modal.querySelector("#errorBirthdate");
     if (birthdate === "") {
-        let birthdateDate = new Date(birthdate);
+        isErrorField(birthdate, errorBirthdate, "Veuillez entrer une date de naissance");
+    } else {
+        let birthdateDate = new Date(birthdate.value);
         let currentDate = new Date();
         let ageDifference = currentDate.getFullYear() - birthdateDate.getFullYear();
-        if (ageDifference < 13) {
-            isErrorField(birthdate, errorBirthdate, "Vous devez avoir au moins 13 ans pour participer")
+        if (ageDifference >= 13) {
+            isValidField(birthdate, errorBirthdate);
         } else {
-            isValidField(birthdate, errorBirthdate)
+            isErrorField(birthdate, errorBirthdate, "Vous devez avoir au moins 13 ans pour participer");
         }
     }
 }
@@ -107,23 +109,29 @@ function addEventForBirthdate() {
 
 // Fonction de validation de la quantité
 function validateQuantity() {
-    let quantity = modal.querySelector("#quantity");
-    let value = quantity.value;
+    let quantity = getField("#quantity");
     let errorQuantity = modal.querySelector("#errorQuantity");
-    let numericInput = /^\d+$/;
-    if (!numericInput.test(value)) {
-        quantity.classList.add('errorInput');
-        errorQuantity.textContent = "Veuillez entrer un nombre valide, celui-ci peut être 0";
-        errorQuantity.style.display = "block";
+    if (quantity.value === "") {
+        isErrorField(quantity, errorQuantity, "Vous devez ajouter un nombre.");
     } else {
-        quantity.classList.add('validInput');
-        errorQuantity.style.display = "none";
-        return isValid;
+        let numericInput = /^\d+$/;
+        if (numericInput.test(quantity.value)) {
+            isValidField(quantity, errorQuantity);
+        } else {
+            isErrorField(quantity, errorQuantity, "Vous devez ajouter un nombre.");
+        }
     }
 }
-// Ajouter un écouteur d'événement input au champ de la quantité
-let quantityInput = modal.querySelector("#quantity");
-quantityInput.addEventListener("input", validateQuantity);
+
+function addEventForQuantity() {
+    getField("#quantity").addEventListener("input", function () {
+        validateQuantity();
+    });
+}
+
+// // Ajouter un écouteur d'événement input au champ de la quantité
+// let quantityInput = modal.querySelector("#quantity");
+// quantityInput.addEventListener("input", validateQuantity);
 
 // Fonction de validation des options
 function validateOptions() {
