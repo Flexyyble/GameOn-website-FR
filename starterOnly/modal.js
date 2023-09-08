@@ -12,6 +12,7 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeBtn = document.querySelector(".close");
+let VALID_FORM ={ 'first':false,'last':false,'email':false,'birthdate':false,'quantity':false,'location':false,'terms':false}
 
 
 // launch modal event
@@ -27,10 +28,13 @@ function openModal() {
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  resetModal()
 }
 
 // Fonction de réinitialisation de la modal
 function resetModal() {
+
+  VALID_FORM ={ 'first':false,'last':false,'email':false,'birthdate':false,'quantity':false,'location':false,'terms':false}
   // Réinitialiser les champs du formulaire en vidant leurs valeurs
   document.getElementById("first").value = "";
   document.getElementById("last").value = "";
