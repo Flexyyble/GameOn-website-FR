@@ -368,7 +368,7 @@ input[data-error]::after {
 
 .btn-submit,
 .btn-signup {
-  background: #fe142f;
+  background: #fe142f !important;
   display: block;
   margin: 0 auto;
   border-radius: 7px;

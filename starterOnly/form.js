@@ -139,7 +139,7 @@ function validateQuantity() {
     let field = getField(fieldName);
     let errorField = getErrorField(fieldName);
     if (quantity.value === "") {
-        isErrorField(fieldName, quantity, errorQuantity, "Vous devez ajouter un nombre.");
+        isErrorField(fieldName, quantity, errorQuantity, "Vous devez ajouter un nombre. Il peut être 0.");
     } else {
         let numericInput = /^\d+$/;
         if (numericInput.test(quantity.value)) {
@@ -205,33 +205,30 @@ function addEventForConditions() {
 
 function toggleSubmitBtn() {
     let inputs = modal.querySelectorAll("input");
-    for (let i = 0; i < inputs.length; i++) {
-        console.log(inputs[i].name)
-        console.log(i)
-        if (!inputs[i].classList.contains("validInput")) {
-            getField('submitBtn').disabled = true;
-            return false;
-        }
-    }
-    console.log("toggleSubmitBtn=false");
-    getField('submitBtn').classList.add('btn-submit');
-    getField('submitBtn').disabled = false;
-    return true;
-}
-
-// Fonction de validation du formulaire
-function validateForm(e) {
-    e.preventDefault();
-
     let isValid = true;
-    isValid = (
-        validateFirstName() && validateLastName() && validateEmail() && validateQuantity() &&
-        validateBirthdate() && validateOptions() && validateConditions());
-
-    if (checkInputs()) {
-        // Tous les champs de saisie sont remplis correctement, vous pouvez valider le formulaire
-    } else {
-
-        isErrorField(submitBtn, errorSubmit, "Vérifiez avoir bien rempli tous les champs pour valider le formulaire.")
-    }
+    inputs.forEach(input => {
+        if (!input.classList.contains("isValidInput")) {
+            isValid = false;
+            return;
+        }
+    });
+    getField('submitBtn').disabled = !isValid;
+    getField('submitBtn').classList.toggle('btn-submit', isValid);
+    return isValid;
 }
+
+// function toggleSubmitBtn() {
+//     let inputs = modal.querySelectorAll("input");
+//     for (let i = 0; i < inputs.length; i++) {
+//         console.log(inputs[i].name)
+//         console.log(i)
+//         if (!inputs[i].classList.contains("validInput")) {
+//             getField('submitBtn').disabled = true;
+//             return false;
+//         }
+//     }
+//     console.log("toggleSubmitBtn=false");
+//     getField('submitBtn').classList.add('btn-submit');
+//     getField('submitBtn').disabled = false;
+//     return true;
+// }
