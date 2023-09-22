@@ -1,3 +1,28 @@
+main();
+
+function main() {
+  addEventforModal();
+}
+
+function addEventforModal() {
+  const modalBtn = document.querySelectorAll(".btn-signup");
+  const closeBtn = document.querySelector(".close");
+  const modalbg = document.querySelector(".bground");
+
+  modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+
+  closeBtn.addEventListener("click", function () {
+    modalbg.style.display = "none";
+    resetModal();
+  });
+}
+
+function launchModal() {
+  const modalbg = document.querySelector(".bground");
+  modalbg.style.display = "block";
+  resetModal();
+}
+
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -7,34 +32,17 @@ function editNav() {
   }
 }
 
-// DOM Elements
-const modalbg = document.querySelector(".bground");
-const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
-const closeBtn = document.querySelector(".close");
-let VALID_FORM ={ 'first':false,'last':false,'email':false,'birthdate':false,'quantity':false,'location':false,'terms':false}
-
-
-// launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-function openModal() {
-  launchModal();
-
-  addEventsForInput();
-  // Appel des fonctions de validation du formulaire de form.js
-}
-
-// launch modal form
-function launchModal() {
-  modalbg.style.display = "block";
-  resetModal()
-}
-
 // Fonction de réinitialisation de la modal
 function resetModal() {
-
-  VALID_FORM ={ 'first':false,'last':false,'email':false,'birthdate':false,'quantity':false,'location':false,'terms':false}
+  VALID_FORM = {
+    first: false,
+    last: false,
+    email: false,
+    birthdate: false,
+    quantity: false,
+    location: false,
+    terms: false,
+  };
   // Réinitialiser les champs du formulaire en vidant leurs valeurs
   document.getElementById("first").value = "";
   document.getElementById("last").value = "";
@@ -47,8 +55,12 @@ function resetModal() {
   document.getElementById("first").classList.remove("errorInput", "validInput");
   document.getElementById("last").classList.remove("errorInput", "validInput");
   document.getElementById("email").classList.remove("errorInput", "validInput");
-  document.getElementById("quantity").classList.remove("errorInput", "validInput");
-  document.getElementById("birthdate").classList.remove("errorInput", "validInput");
+  document
+    .getElementById("quantity")
+    .classList.remove("errorInput", "validInput");
+  document
+    .getElementById("birthdate")
+    .classList.remove("errorInput", "validInput");
   document.getElementById("errorFirst").textContent = "";
   document.getElementById("errorLast").textContent = "";
   document.getElementById("errorEmail").textContent = "";
@@ -57,14 +69,3 @@ function resetModal() {
   document.getElementById("errorOption").textContent = "";
   document.getElementById("errorTerms").textContent = "";
 }
-
-//Close modal on click
-closeBtn.addEventListener("click", function() {
-  modalbg.style.display = "none";
-  resetModal();
-});
-
-// Gestionnaire d'événement pour l'ouverture de la modal
-document.querySelector(".modal-btn").addEventListener("click", function() {
-  openModal();
-});

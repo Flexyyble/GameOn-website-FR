@@ -259,6 +259,13 @@ input {
   color: #ff0000;
 }
 
+/* confirm Modal */
+
+.confirmModal {
+  display: none;
+  text-align: center;
+}
+
 /* 
 input[data-error]::after {
     content: attr(data-error);
