@@ -7,13 +7,11 @@ function main() {
 function addEventforModal() {
   const modalBtn = document.querySelectorAll(".btn-signup");
   const closeBtn = document.querySelector(".close");
-  const modalbg = document.querySelector(".bground");
 
   modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
   closeBtn.addEventListener("click", function () {
-    modalbg.style.display = "none";
-    resetModal();
+    closeModal();
   });
 }
 
@@ -43,6 +41,11 @@ function resetModal() {
     location: false,
     terms: false,
   };
+  getField("confirmModal").style.display = "none";
+  document.querySelector("form").style.display = "block";
+  getField("submitBtn").disabled = true;
+  getField("submitBtn").classList.remove("btn-submit");
+  
   // Réinitialiser les champs du formulaire en vidant leurs valeurs
   document.getElementById("first").value = "";
   document.getElementById("last").value = "";
@@ -68,4 +71,10 @@ function resetModal() {
   document.getElementById("errorBirthdate").textContent = "";
   document.getElementById("errorOption").textContent = "";
   document.getElementById("errorTerms").textContent = "";
+}
+
+function closeModal() {
+  const modalbg = document.querySelector(".bground");
+  modalbg.style.display = "none";
+  resetModal();
 }

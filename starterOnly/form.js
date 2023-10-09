@@ -23,7 +23,7 @@ function isValidField(fieldName, inputField, errorLabel) {
     errorLabel.textContent = "";
 
     VALID_FORM[fieldName] = true;
-    toggleSubmitBtn();
+    checkFormForSubmitBtn();
 }
 
 // Message d'erreur pour un champ invalide
@@ -34,7 +34,7 @@ function isErrorField(fieldName, inputField, errorLabel, msgError) {
     errorLabel.style.display = "block";
 
     VALID_FORM[fieldName] = false;
-    toggleSubmitBtn();
+    checkFormForSubmitBtn();
 }
 
 // Récupération du champ
@@ -242,10 +242,9 @@ function addEventForConditions() {
     });
 }
 
-function toggleSubmitBtn() {
+function checkFormForSubmitBtn() {
     let inputs = document.getElementsByClassName("testInput");
     let isValid = true;
-    let isValidLocation = false;
     for (i = 0; i < inputs.length; i++) {
         if (!inputs[i].classList.contains("validInput")) {
             console.log(inputs[i].name + "KO");
@@ -260,15 +259,12 @@ function toggleSubmitBtn() {
 
 function addEventOnSubmitForm() {
     const confirmClose = getField("close-btn");
-    document
-        .querySelector("#submitBtn")
-        .addEventListener("click", function (event) {
-            event.preventDefault();
-            document.querySelector("form").style.display = "none";
-            getField("confirmModal").style.display = "block";
-        });
-        confirmClose.addEventListener("click", function (event) {
-            getField("confirmModal").style.display = "none";
-            document.querySelector(".bground").style.display = "none";
+    document.querySelector("#submitBtn").addEventListener("click", function (event) {
+        event.preventDefault();
+        document.querySelector("form").style.display = "none";
+        getField("confirmModal").style.display = "block";
+    });
+    confirmClose.addEventListener("click", function (event) {
+        closeModal();
     });
 }
