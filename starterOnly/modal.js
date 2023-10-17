@@ -1,9 +1,12 @@
+// Poit d'entrée
 main();
 
+// Fonction de point d'entrée appelant les events de la modale
 function main() {
   addEventforModal();
 }
 
+// Fonction regroupant les events de la modale
 function addEventforModal() {
   const modalBtn = document.querySelectorAll(".btn-signup");
   const closeBtn = document.querySelector(".close");
@@ -15,6 +18,7 @@ function addEventforModal() {
   });
 }
 
+// Fonction ouverture de la modale
 function launchModal() {
   const modalbg = document.querySelector(".bground");
   modalbg.style.display = "block";
@@ -73,6 +77,7 @@ function resetModal() {
   document.getElementById("errorTerms").textContent = "";
 }
 
+// Fonction fermeture de la modale
 function closeModal() {
   const modalbg = document.querySelector(".bground");
   modalbg.style.display = "none";

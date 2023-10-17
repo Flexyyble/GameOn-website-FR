@@ -1,9 +1,12 @@
+// Point d'entrée
 main();
 
+// Fonctiont de point d'entrée appelant les events
 function main() {
     addEventForForm();
 }
 
+// Fonction appelant les events du form
 function addEventForForm() {
     addEventForFirstname();
     addEventForLastname();
@@ -43,11 +46,13 @@ function getField(fieldName) {
     return modal.querySelector("#" + fieldName);
 }
 
+// Fonction d'affichage erreur
 function getErrorField(fieldName) {
     let modal = document.getElementById("myModal");
     return modal.querySelector("#error" + strUcFirst(fieldName));
 }
 
+// Fonction de validation du champs text
 function validateFieldText(fieldName, msg) {
     let field = getField(fieldName);
     let errorField = getErrorField(fieldName);
@@ -242,12 +247,12 @@ function addEventForConditions() {
     });
 }
 
+// Fonction de validation des champs avant validation
 function checkFormForSubmitBtn() {
     let inputs = document.getElementsByClassName("testInput");
     let isValid = true;
     for (i = 0; i < inputs.length; i++) {
         if (!inputs[i].classList.contains("validInput")) {
-            console.log(inputs[i].name + "KO");
             isValid = false;
             return;
         }
@@ -257,6 +262,7 @@ function checkFormForSubmitBtn() {
     return isValid;
 }
 
+// Fonction d'écoute d'event sur le bouton "submit"
 function addEventOnSubmitForm() {
     const confirmClose = getField("close-btn");
     document.querySelector("#submitBtn").addEventListener("click", function (event) {
